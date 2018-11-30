@@ -36,7 +36,7 @@ public class Pawn : MonoBehaviour {
         float angleToTarget = Vector3.Angle(agentToTargetVector, transform.up);
         //Debug.Log(angleToTarget);
 
-        if (angleToTarget < fieldOfView) {
+        if (angleToTarget <= fieldOfView) {
             RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, agentToTargetVector);
 
             if (hitInfo.collider.gameObject == target) {
@@ -63,5 +63,24 @@ public class Pawn : MonoBehaviour {
 
     public virtual void DisplayMessage(string message) {
         Debug.Log(message);
+    }
+
+    public virtual void DoIdle() {
+        // Do Nothing
+    }
+
+    public virtual void DoSeek(GameObject target, float speed) {
+        Vector3 vectorToTarget = target.transform.position - transform.position;
+        transform.position += vectorToTarget.normalized * speed * Time.deltaTime;
+    }
+
+    public virtual void LookFor(GameObject target) {
+        Vector3 vectorToTarget = target.transform.position - transform.position;
+        transform.up = vectorToTarget;
+    }
+
+    public virtual string ChangeState(string newState) {
+        // Change our state
+        return newState;
     }
 }
