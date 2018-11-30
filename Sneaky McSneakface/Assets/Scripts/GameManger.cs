@@ -21,6 +21,7 @@ public class GameManger : MonoBehaviour {
     // Use this for initialization
     void Start () {
         startMenu.SetActive(true);
+        Time.timeScale = 0;
 	}
 	
 	// Update is called once per frame

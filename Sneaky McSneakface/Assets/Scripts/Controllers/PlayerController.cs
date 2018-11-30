@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : Controller {
 
     public GameObject pauseMenu;
+    public float volume;
 
 	// Use this for initialization
 	void Start () {

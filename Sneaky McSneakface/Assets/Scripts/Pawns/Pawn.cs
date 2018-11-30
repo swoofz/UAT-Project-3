@@ -27,4 +27,41 @@ public class Pawn : MonoBehaviour {
     public virtual void Shoot(GameObject bullet, Transform location) {
         Instantiate(bullet, location.position, transform.rotation);
     }
+
+    public virtual bool CanSee(GameObject target, float fieldOfView) {
+        Vector3 targetPos = target.transform.position;
+
+        Vector3 agentToTargetVector = targetPos - transform.position;
+
+        float angleToTarget = Vector3.Angle(agentToTargetVector, transform.up);
+        //Debug.Log(angleToTarget);
+
+        if (angleToTarget < fieldOfView) {
+            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, agentToTargetVector);
+
+            if (hitInfo.collider.gameObject == target) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public virtual bool CanHear(GameObject target, float volume) {
+        Transform TargetNM = target.GetComponent<Transform>();  // find noiseMaker
+
+        if (TargetNM != null) {
+            volume -= Vector3.Distance(target.transform.position, transform.position);
+
+            if (volume > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public virtual void DisplayMessage(string message) {
+        Debug.Log(message);
+    }
 }

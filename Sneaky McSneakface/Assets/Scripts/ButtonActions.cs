@@ -26,5 +26,6 @@ public class ButtonActions : MonoBehaviour {
         GameManger.instance.Reset();    // reset the game
         ChangeActive();                 // deactive menu
         GameManger.instance.gameIsRuning = true;
+        Time.timeScale = 1;
     }
 }
