@@ -10,6 +10,8 @@ public class ButtonActions : MonoBehaviour {
 
     public void ChangeActive() {
         gameObject.SetActive(!gameObject.activeSelf);   // Change active state
+        GameManger.instance.gameIsRuning = true;
+        Time.timeScale = 1;
     }
 
     public void QuitGame() {
@@ -25,7 +27,5 @@ public class ButtonActions : MonoBehaviour {
     public void Reset() {
         GameManger.instance.Reset();    // reset the game
         ChangeActive();                 // deactive menu
-        GameManger.instance.gameIsRuning = true;
-        Time.timeScale = 1;
     }
 }
