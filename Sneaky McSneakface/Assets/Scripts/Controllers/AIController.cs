@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class AIController : Controller {
 
-    public float fov = 45;
+    public float fov = 45;          // Create a variable for the AI field of view
     
-    private PlayerController target;
+    private PlayerController target;    // Create a variable to get the target
 
 	// Use this for initialization
 	void Start () {
-        GameManger.instance.AIList.Add(this);
-        GameManger.instance.startLocactions.Add(transform.position);
-        GameManger.instance.allController.Add(this);
+        GameManger.instance.AIList.Add(this);                           // Add this component to a GameManger list
+        GameManger.instance.startLocactions.Add(transform.position);    // Add this transform position component to a GameManger list
+        GameManger.instance.allController.Add(this);                    // Add this component to a GameManger list
     }
 
     // Update is called once per frame
     void Update () {
-        //if (canHear) {
-        //    pawn.DisplayMessage("What was that");
-        //}
-        //if (canSee) {
-        //    pawn.DisplayMessage("I can see you");
-        //}
+        // TODO:: Add message to the game world canvas element when can see or can hear the target 
     }
 
     void OnTriggerStay2D(Collider2D collision) {
