@@ -10,6 +10,8 @@ public class PlayerController : Controller {
     private float playerSpeed;          // Create a variable to control player speed
     private bool isWalking;             // Create a variable to control if player is walking
     private float sprintVolume;         // Create a variable to change volume noise
+    private float timer, timerStart;    // Create variable for a timer
+    private bool talking;               // Create a variable for player chat
 
 	// Use this for initialization
 	void Start () {
@@ -17,6 +19,7 @@ public class PlayerController : Controller {
         sprintVolume = volume;                                          // Get the intial volume
         GameManger.instance.startLocactions.Add(transform.position);    // Add this transform position component to a GameManger list
         GameManger.instance.allController.Add(this);                    // Add this component to a GameManger list
+        timerStart = 2;                                                 // Set timer start values
     }
 
     // Update is called once per frame
@@ -24,6 +27,20 @@ public class PlayerController : Controller {
         Movement();                                 // Run movement function
         if (Input.GetKeyDown(KeyCode.Escape)) {     // If you press the escape key 
             PauseGame(pauseMenu);                   // pause the game
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !talking) {      // If you press the space key
+            pawn.Attack(5);                                     // Attack
+            talking = true;                                     // talking is true
+            timer = timerStart;                                 // Set timer equal to the start
+        }
+
+        if (talking) {                  // if talking
+            timer -= Time.deltaTime;    // start timer count down
+            if (timer < 0) {            // if timer hits 0
+                talking = false;        // talking is false
+                volume = sprintVolume;  // volume set back to start volume
+            }
         }
 	}
 

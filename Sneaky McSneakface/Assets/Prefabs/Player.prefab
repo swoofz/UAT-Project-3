@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4211857696053952}
   - component: {fileID: 212076795498747628}
   - component: {fileID: 61981787967422112}
-  - component: {fileID: 114471993982636884}
+  - component: {fileID: 114036997524738328}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -196,7 +196,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1395364087802172}
   m_Enabled: 1
---- !u!114 &114471993982636884
+--- !u!114 &114036997524738328
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755220688797046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348470e496ed0ba40bd7cc52f368afc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f12d56789246aa4dabbaf9a3c78ff81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114532318628764588
@@ -221,7 +221,7 @@ MonoBehaviour:
   health: 0
   dealDamage: 0
   speed: 5
-  pawn: {fileID: 114471993982636884}
+  pawn: {fileID: 114036997524738328}
   pauseMenu: {fileID: 1637484984565720, guid: 5a2278dbc15e0014ebdd8c33a45af005, type: 2}
   volume: 2
 --- !u!212 &212076795498747628
