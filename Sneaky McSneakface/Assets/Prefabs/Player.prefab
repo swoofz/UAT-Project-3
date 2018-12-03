@@ -314,7 +314,7 @@ MonoBehaviour:
   dealDamage: 5
   speed: 5
   pawn: {fileID: 114036997524738328}
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 1637484984565720, guid: 5a2278dbc15e0014ebdd8c33a45af005, type: 2}
   volume: 2
   messageToYell: ARGGGG!
 --- !u!114 &114892275865684680
