@@ -21,26 +21,26 @@ public class AIController : Controller {
     }
 
     void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.transform.parent != null) {
-            if (collision.gameObject.transform.parent.tag == "Player") {
-                target = collision.gameObject.transform.parent.GetComponent<PlayerController>();
-                GameManger.instance.playerTarget = target;
-                GameManger.instance.target = this;
+        if (collision.gameObject.transform.parent != null) {                                        // If colliding with an gameobject with a parent 
+            if (collision.gameObject.transform.parent.tag == "Player") {                            // If colliding with a player object
+                target = collision.gameObject.transform.parent.GetComponent<PlayerController>();    // Set target to the player controller
+                GameManger.instance.playerTarget = target;                                          // Send the target to gameManger Component
+                GameManger.instance.target = this;                                                  // Set target in the gameManger to this gameobject
 
-                if (target != null) {
-                    GameManger.canHear = pawn.CanHear(collision.gameObject, target.volume);
-                    GameManger.canSee = pawn.CanSee(collision.gameObject, fov);
-                } else {
-                    Debug.LogWarning("No PlayerController on an object with a player tag");
+                if (target != null) {                                                           // If target doesn't equals null
+                    GameManger.canHear = pawn.CanHear(collision.gameObject, target.volume);     // Set canHear in the gameManger 
+                    GameManger.canSee = pawn.CanSee(collision.gameObject, fov);                 // Set canSee in the gameManger
+                } else {                                                                        // Otherwise
+                    Debug.LogWarning("No PlayerController on an object with a player tag");     // throw warning
                 }
             }
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.transform.parent != null) {
-            if (collision.gameObject.transform.parent.tag == "Player") {
-                GameManger.canSee = false;
+    void OnTriggerExit2D(Collider2D collision) {                            
+        if (collision.gameObject.transform.parent != null) {                // If the gameobject that left the collider has a parent
+            if (collision.gameObject.transform.parent.tag == "Player") {    // if the gameobject is a player
+                GameManger.canSee = false;                                  // set canSee to false in gameManger
             }
         }
     }
