@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AI : Pawn {    // Inherits from Pawn Component
 
+    public override int Attack(int damage) {
+        return damage;                          // just return damage
+    }
+
     public override float DoIdle(float speed, float num) {
         float countDown = CountDown(num);                   // Run a count down
         if (countDown < 0) {                                // If countDown hits 0

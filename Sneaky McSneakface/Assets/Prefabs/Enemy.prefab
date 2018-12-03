@@ -108,7 +108,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4
 --- !u!61 &61568550763562050
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c95b8ea97f6f524d8c36e84bc3186cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  dealDamage: 0
+  health: 20
+  dealDamage: 2
   speed: 3
   pawn: {fileID: 114494349614284042}
   fov: 45

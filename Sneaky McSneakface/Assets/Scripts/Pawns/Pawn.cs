@@ -64,6 +64,10 @@ public class Pawn : MonoBehaviour {
         Debug.Log(message);
     }
 
+    public virtual void DisableMessage() {
+        Debug.Log("Does nothing in parent component");  // Set up the disable message for other component to use
+    }
+
     public virtual float DoIdle(float aiSpeed=0, float aiNum=0) {
         // Do Nothing
         return 0;

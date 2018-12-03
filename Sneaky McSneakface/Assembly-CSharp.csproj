@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Pawns\AI.cs" />
     <Compile Include="Assets\Scripts\Pawns\Human.cs" />
     <Compile Include="Assets\Scripts\Pawns\Pawn.cs" />
+    <Compile Include="Assets\Scripts\Win.cs" />
     <None Include="Assets\Art\kenney_sportspack\Spritesheet\sheet_charactersEquipment.xml" />
     <None Include="Assets\Art\kenney_sportspack\Spritesheet\sheet_equipment.xml" />
     <None Include="Assets\Art\kenney_sportspack\License.txt" />

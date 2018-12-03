@@ -6,6 +6,7 @@ public class PlayerController : Controller {
 
     public GameObject pauseMenu;        // Create a variable to store the pause menu
     public float volume;                // Create a variable to control player noise making
+    public string messageToYell;        // Create a variable to set up a message to display
 
     private float playerSpeed;          // Create a variable to control player speed
     private bool isWalking;             // Create a variable to control if player is walking
@@ -15,24 +16,30 @@ public class PlayerController : Controller {
 
 	// Use this for initialization
 	void Start () {
-        playerSpeed = speed;                                            // Get the intial speed
-        sprintVolume = volume;                                          // Get the intial volume
         GameManger.instance.startLocactions.Add(transform.position);    // Add this transform position component to a GameManger list
         GameManger.instance.allController.Add(this);                    // Add this component to a GameManger list
+        GameManger.instance.playerHealth.value = health;                // Set the players health to the gameManger slider
+        playerSpeed = speed;                                            // Get the intial speed
+        sprintVolume = volume;                                          // Get the intial volume
         timerStart = 2;                                                 // Set timer start values
     }
 
     // Update is called once per frame
     void Update () {
+        if (GameManger.instance.gameIsRuning) {                       // if the game is running
+            health = ( int )GameManger.instance.playerHealth.value;   // Keep same value of health as in the GameManger
+        }
+
         Movement();                                 // Run movement function
         if (Input.GetKeyDown(KeyCode.Escape)) {     // If you press the escape key 
             PauseGame(pauseMenu);                   // pause the game
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !talking) {      // If you press the space key
-            pawn.Attack(5);                                     // Attack
+            pawn.Attack(dealDamage);                            // Attack
             talking = true;                                     // talking is true
             timer = timerStart;                                 // Set timer equal to the start
+            pawn.DisplayMessage(messageToYell);                 // Send a message to display
         }
 
         if (talking) {                  // if talking
@@ -40,6 +47,7 @@ public class PlayerController : Controller {
             if (timer < 0) {            // if timer hits 0
                 talking = false;        // talking is false
                 volume = sprintVolume;  // volume set back to start volume
+                pawn.DisableMessage();  // Disable the message that got displayed
             }
         }
 	}

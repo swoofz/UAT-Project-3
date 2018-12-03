@@ -44,4 +44,10 @@ public class AIController : Controller {
             }
         }
     }
+
+    void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") {                             // if the gameobject is a player
+            GameManger.instance.playerHealth.value -= pawn.Attack(dealDamage);  // Lower players health
+        }
+    }
 }

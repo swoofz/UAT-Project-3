@@ -1,22 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManger : MonoBehaviour {
 
-    public static GameManger instance;  // Create a singleton
-    public GameObject startMenu;        // Create a variable to hold the Start menu
-    public bool gameIsRuning;           // Create a variable to know when the game is running
+    public static GameManger instance;          // Create a singleton
+    public GameObject startMenu;                // Create a variable to hold the Start menu
+    public bool gameIsRuning;                   // Create a variable to know when the game is running
+    public GameObject winScreen, LoseScreen;    // Create variable to hold menu screens
 
     public Controller playerTarget, target;                     // Create variables to store controller information
     public static bool canHear, canSee;                         // Create variables to add to the Finite State Machine logic
     public List<Controller> AIList = new List<Controller>();    // Create a List to of all AIs in the scene
     public List<Vector3> startLocactions;                       // Create a List to store the location of all controller components
     public List<Controller> allController;                      // Create a List of all Controller components in the scene
+    public Slider playerHealth;                                 // Create a variable to hold a slider
+    public bool win, lose;                                      // Create variables to check state of the game
 
     private string aiState;         // Create a variable to store an AI state
     private float countDown;        // Create a variable to make a timer count down
     private float startPoint;       // Create a variable to hold the value of the count down start point
+    private int playerHp;           // Create a variable to hold the start value of the player's health
 
     private void Awake() {
         if (instance != null) {                                                     // If there is already a gameManger in the scene
@@ -30,9 +35,10 @@ public class GameManger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        startMenu.SetActive(true);  // Start Menu to active
-        Time.timeScale = 0;         // Freeze motion
-        startPoint = 3;             // Set a count down start point
+        startMenu.SetActive(true);          // Start Menu to active
+        Time.timeScale = 0;                 // Freeze motion
+        startPoint = 3;                     // Set a count down start point
+        playerHp = (int)playerHealth.value; // Get the player hp 
     }
 	
 	// Update is called once per frame
@@ -51,6 +57,25 @@ public class GameManger : MonoBehaviour {
                 FSM();                                              // run Finite State Mahcine
             }
         }
+
+        if (playerHealth.value <= 0 && gameIsRuning) {      // if the player's health reaches 0 and game is running
+            lose = true;                                    // Game is over and player lost
+        }
+
+        if (win || lose) {          // if lose or win condition is meet
+            Time.timeScale = 0;     // freeze motion
+            gameIsRuning = false;   // game is not runnign
+
+            if (win) {                      // if win
+                winScreen.SetActive(true);  // show win screen
+                win = false;                // Reset win to false
+            } else {                        // otherwise if lose
+                LoseScreen.SetActive(true); // show lose screen
+                lose = false;               // Reset lose to false
+
+            }
+        }
+
     }
 
     // Finite State Machine
@@ -93,7 +118,7 @@ public class GameManger : MonoBehaviour {
     // Menu Controls Below
     public void PlayerGame(GameObject menu) {
         ResetGame();                            // Make sure game is at a default state
-        menu.SetActive(!menu.activeSelf);       // Deactive the menu that is being shown
+        menu.SetActive(false);                  // Deactive the menu that is being shown
         gameIsRuning = true;                    // Let game input be used
         Time.timeScale = 1;                     // Let objects move
         aiState = "idle";                       // Set AI state equal to idle on game start
@@ -103,6 +128,8 @@ public class GameManger : MonoBehaviour {
         for (int i = 0; i < allController.Count; i++) {                 // Find all controller component
             allController[i].transform.position = startLocactions[i];   // Reset their position to starting locations
         }
+
+        playerHealth.value = playerHp;  // Reset the player hp
     }
 
     public void TogglePauseMenu(GameObject pause) {
@@ -126,5 +153,6 @@ public class GameManger : MonoBehaviour {
     public void QuitGame() {
         // Quit the Application
         Application.Quit();
+        Debug.Log("Quit");
     }
 }
