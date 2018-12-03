@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Human : Pawn {
 
-    public Text text;
-    public GameObject textbox;
+    public Text text;               // Create a variable to send a message to
+    public GameObject textbox;      // Create a variable to get the entired text area
 
     public override int Attack(int damage) {
         // Yell if player
